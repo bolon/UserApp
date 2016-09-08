@@ -1,0 +1,64 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
+
+    defaultConfig {
+        applicationId "com.nnd.bolon.dynedassesment"
+        minSdkVersion 17
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8 //lambda ftw
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+def supportLibraryVersion = '24.0.0'
+def daggerVersion = '1.2.2'
+def okHttpVersion = '3.4.1'
+def retrofit2Version = '2.1.0'
+def butterKnifeVersion = '8.4.0'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+
+    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
+    compile "com.android.support:design:$supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$supportLibraryVersion"
+
+    compile "com.squareup.retrofit2:retrofit:$retrofit2Version"
+
+    compile "com.squareup.okhttp3:okhttp:$okHttpVersion"
+
+    compile "com.squareup.dagger:dagger:$daggerVersion"
+    provided "com.squareup.dagger:dagger-compiler:$daggerVersion"
+
+    compile "com.jakewharton:butterknife:$butterKnifeVersion"
+
+    compile 'com.jakewharton.timber:timber:4.3.0'
+
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
+
+    compile "com.squareup.retrofit2:converter-gson:$retrofit2Version"
+}
