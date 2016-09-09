@@ -1,11 +1,9 @@
-package com.nnd.bolon.dynedassesment.dependency;
+package com.nnd.bolon.dynedassesment.dependency.modules;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.nnd.bolon.dynedassesment.dependency.network.NetworkInterface;
-import com.nnd.bolon.dynedassesment.splash.SplashActivity;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -13,6 +11,7 @@ import dagger.Provides;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -21,10 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module(
         complete = false,
-        library = true,
-        injects = {
-                SplashActivity.class
-        }
+        library = true
 )
 
 public final class ApiModule {
@@ -33,6 +29,7 @@ public final class ApiModule {
     private Retrofit.Builder initRetrofit(Call.Factory callFactory, Gson gson) {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .callFactory(callFactory);
     }
 
