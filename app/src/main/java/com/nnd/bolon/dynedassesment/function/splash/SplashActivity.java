@@ -1,4 +1,4 @@
-package com.nnd.bolon.dynedassesment.splash;
+package com.nnd.bolon.dynedassesment.function.splash;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +11,7 @@ import com.nnd.bolon.dynedassesment.R2;
 import com.nnd.bolon.dynedassesment.dependency.App;
 import com.nnd.bolon.dynedassesment.dependency.data.user.User;
 import com.nnd.bolon.dynedassesment.dependency.network.NetworkInterface;
-import com.nnd.bolon.dynedassesment.main.MainActivity;
+import com.nnd.bolon.dynedassesment.function.MainActivity;
 
 import java.util.List;
 
@@ -41,7 +41,6 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        getSupportActionBar().hide();
         App.get(getApplicationContext()).getInjector().inject(this);
         ButterKnife.bind(this);
 

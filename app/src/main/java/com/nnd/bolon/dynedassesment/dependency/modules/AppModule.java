@@ -3,11 +3,10 @@ package com.nnd.bolon.dynedassesment.dependency.modules;
 import android.app.Application;
 
 import com.nnd.bolon.dynedassesment.dependency.App;
-import com.nnd.bolon.dynedassesment.dependency.modules.ApiModule;
-import com.nnd.bolon.dynedassesment.main.MainActivity;
-import com.nnd.bolon.dynedassesment.main.fragment.ListUsersFragment;
-import com.nnd.bolon.dynedassesment.main.fragment.ListUsersRecyclerViewAdapter;
-import com.nnd.bolon.dynedassesment.splash.SplashActivity;
+import com.nnd.bolon.dynedassesment.function.MainActivity;
+import com.nnd.bolon.dynedassesment.function.about.AboutActivity;
+import com.nnd.bolon.dynedassesment.function.showlistuser.ListUsersFragment;
+import com.nnd.bolon.dynedassesment.function.splash.SplashActivity;
 
 import dagger.Module;
 import dagger.Provides;

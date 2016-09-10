@@ -1,38 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/coordinatorLayout"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <android.support.v7.widget.CardView
+        <android.support.v7.widget.SearchView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/searchViewListUser"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.v7.widget.SearchView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/searchViewListUser"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:focusable="false"
-                android:focusableInTouchMode="true" />
-        </android.support.v7.widget.CardView>
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:focusable="false"
+            android:focusableInTouchMode="true" />
+    </android.support.v7.widget.CardView>
 
 
-        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/listUser"
-            android:name="com.nnd.bolon.dynedassesment.main.fragment.ListUsersFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="16dp"
-            tools:context="com.nnd.bolon.dynedassesment.main.fragment.ListUsersFragment"
-            tools:listitem="@layout/fragment_listusers" />
-    </LinearLayout>
-</android.support.design.widget.CoordinatorLayout>
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/listUser"
+        android:name="com.nnd.bolon.dynedassesment.main.fragment.ListUsersFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".function.showlistuser.ListUsersFragment"
+        tools:listitem="@layout/fragment_listusers" />
+</LinearLayout>

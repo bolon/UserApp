@@ -1,4 +1,4 @@
-package com.nnd.bolon.dynedassesment.main.fragment;
+package com.nnd.bolon.dynedassesment.function.showlistuser;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,8 +10,6 @@ import com.nnd.bolon.dynedassesment.R;
 import com.nnd.bolon.dynedassesment.dependency.data.user.User;
 
 import java.util.List;
-
-import timber.log.Timber;
 
 public class ListUsersRecyclerViewAdapter extends RecyclerView.Adapter<ListUsersRecyclerViewAdapter.ViewHolder> {
 
@@ -32,14 +30,12 @@ public class ListUsersRecyclerViewAdapter extends RecyclerView.Adapter<ListUsers
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = listUser.get(position);
+        holder.user = listUser.get(position);
         holder.name.setText(listUser.get(position).getName());
 
         holder.mView.setOnClickListener(v -> {
             if (null != mListener) {
-                // Notify the active callbacks interface (the activity, if the
-                // fragment is attached to one) that an item has been selected.
-                Timber.i("im touched beb");
+                mListener.onItemClicked(holder.user);
             }
         });
     }
@@ -102,7 +98,7 @@ public class ListUsersRecyclerViewAdapter extends RecyclerView.Adapter<ListUsers
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView name;
-        public User mItem;
+        public User user;
 
         public ViewHolder(View view) {
             super(view);

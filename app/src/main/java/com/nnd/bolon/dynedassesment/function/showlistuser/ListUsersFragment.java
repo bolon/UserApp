@@ -1,5 +1,6 @@
-package com.nnd.bolon.dynedassesment.main.fragment;
+package com.nnd.bolon.dynedassesment.function.showlistuser;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -33,7 +34,6 @@ import timber.log.Timber;
  * interface.
  */
 public class ListUsersFragment extends Fragment {
-    private static final String ARG_COLUMN_COUNT = "column-count";
     @Inject
     Realm realm;
     @BindView(R2.id.searchViewListUser)
@@ -59,24 +59,6 @@ public class ListUsersFragment extends Fragment {
         recyclerViewAdapter = new ListUsersRecyclerViewAdapter(userList, mListener);
     }
 
-    private void setSearchFunction() {
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                List<User> filteredList = filter(newText);
-                recyclerViewAdapter.animateTo(filteredList);
-                recyclerView.scrollToPosition(0);
-
-                return true;
-            }
-        });
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -96,10 +78,10 @@ public class ListUsersFragment extends Fragment {
         return view;
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
         if (context instanceof OnListFragmentInteractionListener) {
             mListener = (OnListFragmentInteractionListener) context;
         } else {
@@ -112,6 +94,24 @@ public class ListUsersFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    private void setSearchFunction() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                List<User> filteredList = filter(newText);
+                recyclerViewAdapter.animateTo(filteredList);
+                recyclerView.scrollToPosition(0);
+
+                return true;
+            }
+        });
     }
 
     private List<User> filter(String query) {
@@ -138,6 +138,6 @@ public class ListUsersFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(List<User> listUser);
+        void onItemClicked(User user);
     }
 }
