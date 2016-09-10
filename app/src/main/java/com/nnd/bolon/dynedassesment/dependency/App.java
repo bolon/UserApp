@@ -36,7 +36,6 @@ public class App extends Application {
         //Iconify
         Iconify.with(new FontAwesomeModule());
 
-        //TODO : APIMODULE & DATAMODULE (USE REALM MAYBE)
         injector = ObjectGraph.create(new AppModule(this));
     }
 

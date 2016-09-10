@@ -9,12 +9,11 @@ import io.realm.RealmObject;
  */
 public class Geo extends RealmObject{
     String lat;
-    @SerializedName("long")
-    String position_long;
+    String lng;
 
     public String getLat(){ return this.lat; }
     public void setLat(String lat){ this.lat = lat; }
 
-    public String getPosition_long(){ return this.position_long; }
-    public void setPosition_long(String position_long){this.position_long = position_long; }
+    public String getLng(){ return this.lng; }
+    public void setLng(String lng){this.lng = lng; }
 }

@@ -5,6 +5,7 @@ import android.app.Application;
 import com.nnd.bolon.dynedassesment.dependency.App;
 import com.nnd.bolon.dynedassesment.function.MainActivity;
 import com.nnd.bolon.dynedassesment.function.about.AboutActivity;
+import com.nnd.bolon.dynedassesment.function.detail.DetailUser;
 import com.nnd.bolon.dynedassesment.function.showlistuser.ListUsersFragment;
 import com.nnd.bolon.dynedassesment.function.splash.SplashActivity;
 
@@ -25,6 +26,7 @@ import dagger.Provides;
                 SplashActivity.class,
                 MainActivity.class,
                 ListUsersFragment.class,
+                DetailUser.class
         }
 )
 public class AppModule {

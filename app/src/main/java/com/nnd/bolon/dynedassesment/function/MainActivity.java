@@ -1,6 +1,7 @@
 package com.nnd.bolon.dynedassesment.function;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -71,13 +73,27 @@ public class MainActivity extends AppCompatActivity implements ListUsersFragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_about:
+            case R.id.action_about:{}
                 startActivity(AboutActivity.createIntent(getApplicationContext()));
+                break;
             case R.id.action_logout:
-                Timber.i(item.getTitle().toString());
+                buildAlertDialog().show();
+                break;
         }
-
         return true;
+    }
+
+    private AlertDialog buildAlertDialog() {
+            AlertDialog alertDialogBuilder = new AlertDialog.Builder(this)
+                    .setMessage(R.string.alertDialogMessage)
+                    .setNegativeButton(R.string.no, (dialogInterface, i) -> {
+                        dialogInterface.dismiss();
+                    })
+                    .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                        MainActivity.this.finish();
+                    }).create();
+
+        return alertDialogBuilder;
     }
 
     private void setView() {
@@ -98,16 +114,8 @@ public class MainActivity extends AppCompatActivity implements ListUsersFragment
     }
 
     private ListUsersFragment setListUserFragment() {
-        //TODO : set value from here not from fragment
-        /*
-        RealmResults<User> realmResults = realm.where(User.class).findAll();
-
-        List<User> result = realmResults;
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("KEY", (ArrayList<? extends Parcelable>) result);
-        */
+        //TODO : set value from here not from fragment | hint : parcelable
         ListUsersFragment listUsersFragment = new ListUsersFragment();
-        //listUsersFragment.setArguments(bundle);
 
         return listUsersFragment;
     }
@@ -120,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements ListUsersFragment
 
     @Override
     public void onItemClicked(User user) {
-        startActivity(DetailUser.createIntent(getApplicationContext(), user.getId()));
+        startActivity(DetailUser.createIntent(getApplicationContext(), user.getId(), user.getName()));
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

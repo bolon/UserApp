@@ -29,12 +29,10 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     private void setToolbar() {
+        toolbar.setTitle(R.string.about);
         setSupportActionBar(toolbar);
 
-        toolbar.setTitle(R.string.about);
-        toolbar.setNavigationOnClickListener(view -> {
-            AboutActivity.this.finish();
-        });
+        toolbar.setNavigationOnClickListener(view -> AboutActivity.this.finish());
     }
 
     public static Intent createIntent(Context context){

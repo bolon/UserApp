@@ -14,7 +14,6 @@ public class User extends RealmObject { //TODO : CREATE PARCELABLE
     String username;
     String email;
     Address address;
-    Geo geo;
     String phone;
     String website;
     Company company;
@@ -57,14 +56,6 @@ public class User extends RealmObject { //TODO : CREATE PARCELABLE
 
     public void setAddress(Address address) {
         this.address = address;
-    }
-
-    public Geo getGeo() {
-        return this.geo;
-    }
-
-    public void setGeo(Geo geo) {
-        this.geo = geo;
     }
 
     public String getPhone() {
