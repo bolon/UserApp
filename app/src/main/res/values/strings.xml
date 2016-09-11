@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">DynedAssesment</string>
+    <string name="about">About</string>
+    <string name="ack_success">Data update success</string>
+    <string name="ack_fail">Data update failed</string>
+    <string name="action_about">About</string>
+    <string name="action_exit">Exit</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+    <string name="phone">Phone</string>
+    <string name="website">Website</string>
+    <string name="company">Company</string>
+    <string name="geolocation">Geolocation</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="alertDialogMessage">Are you sure want to exit ?</string>
 </resources>
