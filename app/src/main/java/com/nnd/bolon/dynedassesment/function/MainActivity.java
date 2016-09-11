@@ -1,9 +1,9 @@
 package com.nnd.bolon.dynedassesment.function;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -33,7 +33,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
-import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements ListUsersFragment.OnListFragmentInteractionListener {
     @Inject
@@ -128,7 +127,13 @@ public class MainActivity extends AppCompatActivity implements ListUsersFragment
 
     @Override
     public void onItemClicked(User user) {
-        startActivity(DetailUser.createIntent(getApplicationContext(), user.getId(), user.getName()));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            startActivity(DetailUser.createIntent(getApplicationContext(), user.getId(), user.getName()));
+        }
+        else {
+            startActivity(DetailUser.createIntent(getApplicationContext(), user.getId(), user.getName()));
+            overridePendingTransition(R.anim.slide_start_main, R.anim.slide_end_main);
+        }
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

@@ -1,6 +1,5 @@
 package com.nnd.bolon.dynedassesment.function.showlistuser;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,7 +24,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
-import timber.log.Timber;
 
 /**
  * A fragment representing a list of Items.
@@ -70,7 +68,8 @@ public class ListUsersFragment extends Fragment {
 
         // Set the adapter
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).build());
+        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity())
+                .marginResId(R.dimen.activity_horizontal_margin, R.dimen.activity_horizontal_margin).build());
         recyclerView.setAdapter(recyclerViewAdapter);
 
         setSearchFunction();

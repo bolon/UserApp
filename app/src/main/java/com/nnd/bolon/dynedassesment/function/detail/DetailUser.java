@@ -2,9 +2,11 @@ package com.nnd.bolon.dynedassesment.function.detail;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.TransitionInflater;
 import android.widget.TextView;
 
 import com.nnd.bolon.dynedassesment.R;
@@ -59,6 +61,8 @@ public class DetailUser extends AppCompatActivity {
         App.get(getApplicationContext()).getInjector().inject(this);
         ButterKnife.bind(this);
 
+        setupWindowAnimation();
+
         Intent intent = getIntent();
 
         setToolbar(intent.getStringExtra(NAME_KEY));
@@ -82,5 +86,11 @@ public class DetailUser extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         toolbar.setNavigationOnClickListener(view -> DetailUser.this.finish());
+    }
+
+    private void setupWindowAnimation() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setEnterTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.slide_top));
+        }
     }
 }

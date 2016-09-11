@@ -53,18 +53,18 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 saveToDb(response.body());
-                doTransition();
+                doTransition(true);
             }
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-                updateAck(false);
+                doTransition(false);
             }
         });
     }
 
-    private void doTransition() {
-        updateAck(true);
+    private void doTransition(boolean result) {
+        updateAck(result);
         startActivity(MainActivity.createIntent(getBaseContext()));
         overridePendingTransition(R.anim.slide1, R.anim.slide2);
         this.finish();
