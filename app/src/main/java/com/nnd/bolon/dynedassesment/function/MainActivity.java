@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -25,6 +26,8 @@ import com.nnd.bolon.dynedassesment.function.about.AboutActivity;
 import com.nnd.bolon.dynedassesment.function.detail.DetailUser;
 import com.nnd.bolon.dynedassesment.function.showlistuser.ListUsersFragment;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +38,8 @@ import butterknife.ButterKnife;
 import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity implements ListUsersFragment.OnListFragmentInteractionListener {
+    public static String LISTUSER_KEY = "listUser_key";
+
     @Inject
     Realm realm;
 
@@ -72,9 +77,10 @@ public class MainActivity extends AppCompatActivity implements ListUsersFragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_about:{}
-                startActivity(AboutActivity.createIntent(getApplicationContext()));
-                break;
+            case R.id.action_about: {
+            }
+            startActivity(AboutActivity.createIntent(getApplicationContext()));
+            break;
             case R.id.action_logout:
                 buildAlertDialog().show();
                 break;
@@ -83,14 +89,14 @@ public class MainActivity extends AppCompatActivity implements ListUsersFragment
     }
 
     private AlertDialog buildAlertDialog() {
-            AlertDialog alertDialogBuilder = new AlertDialog.Builder(this)
-                    .setMessage(R.string.alertDialogMessage)
-                    .setNegativeButton(R.string.no, (dialogInterface, i) -> {
-                        dialogInterface.dismiss();
-                    })
-                    .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
-                        MainActivity.this.finish();
-                    }).create();
+        AlertDialog alertDialogBuilder = new AlertDialog.Builder(this)
+                .setMessage(R.string.alertDialogMessage)
+                .setNegativeButton(R.string.no, (dialogInterface, i) -> {
+                    dialogInterface.dismiss();
+                })
+                .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                    MainActivity.this.finish();
+                }).create();
 
         return alertDialogBuilder;
     }
@@ -113,9 +119,15 @@ public class MainActivity extends AppCompatActivity implements ListUsersFragment
     }
 
     private ListUsersFragment setListUserFragment() {
-        //TODO : set value from here not from fragment | hint : parcelable
         ListUsersFragment listUsersFragment = new ListUsersFragment();
 
+        List<User> listUser = realm.copyFromRealm(realm.where(User.class).findAllSorted("name"));
+        Parcelable wrapped = Parcels.wrap(listUser);
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(LISTUSER_KEY, wrapped);
+
+        listUsersFragment.setArguments(bundle);
         return listUsersFragment;
     }
 
@@ -129,8 +141,7 @@ public class MainActivity extends AppCompatActivity implements ListUsersFragment
     public void onItemClicked(User user) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             startActivity(DetailUser.createIntent(getApplicationContext(), user.getId(), user.getName()));
-        }
-        else {
+        } else {
             startActivity(DetailUser.createIntent(getApplicationContext(), user.getId(), user.getName()));
             overridePendingTransition(R.anim.slide_start_main, R.anim.slide_end_main);
         }

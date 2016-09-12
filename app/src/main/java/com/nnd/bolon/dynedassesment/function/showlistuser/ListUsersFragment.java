@@ -14,7 +14,10 @@ import com.nnd.bolon.dynedassesment.R;
 import com.nnd.bolon.dynedassesment.R2;
 import com.nnd.bolon.dynedassesment.dependency.App;
 import com.nnd.bolon.dynedassesment.dependency.data.user.User;
+import com.nnd.bolon.dynedassesment.function.MainActivity;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,10 +54,10 @@ public class ListUsersFragment extends Fragment {
         App.get(getContext()).getInjector().inject(this);
 
         if (getArguments() != null) {
-            //TODO : get data from activity. fragment only ui
+            userList.addAll(Parcels.unwrap(getArguments().getParcelable(MainActivity.LISTUSER_KEY)));
+
+            recyclerViewAdapter = new ListUsersRecyclerViewAdapter(userList, mListener);
         }
-        userList = realm.copyFromRealm(realm.where(User.class).findAll());
-        recyclerViewAdapter = new ListUsersRecyclerViewAdapter(userList, mListener);
     }
 
     @Override
@@ -115,13 +118,16 @@ public class ListUsersFragment extends Fragment {
 
     private List<User> filter(String query) {
         query = query.toLowerCase();
+
         final List<User> filteredList = new ArrayList<>();
-        for (User user : realm.where(User.class).findAll()) {
+        List<User> tempList = realm.where(User.class).findAllSorted("name");
+        for (User user : tempList) {
             final String text = user.getName().toLowerCase();
             if (text.contains(query)) {
                 filteredList.add(user);
             }
         }
+
         return filteredList;
     }
 

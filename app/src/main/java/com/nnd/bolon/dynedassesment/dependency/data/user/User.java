@@ -1,13 +1,18 @@
 package com.nnd.bolon.dynedassesment.dependency.data.user;
 
+import org.parceler.Parcel;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
 
 /**
  * Created by lenovo on 9/8/2016.
  */
 //TODO : CHANGE WITH AUTOVALUE CLASS SINCE THERE IS A LOT <<< BOILERPLATE HERE
-public class User extends RealmObject { //TODO : CREATE PARCELABLE
+@RealmClass
+@Parcel
+public class User extends RealmObject {
     @PrimaryKey
     String id;
     String name;

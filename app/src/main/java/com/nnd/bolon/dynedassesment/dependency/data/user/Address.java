@@ -1,10 +1,13 @@
 package com.nnd.bolon.dynedassesment.dependency.data.user;
 
+import org.parceler.Parcel;
+
 import io.realm.RealmObject;
 
 /**
  * Created by lenovo on 9/8/2016.
  */
+@Parcel
 public class Address extends RealmObject {
     String street;
     String suite;
